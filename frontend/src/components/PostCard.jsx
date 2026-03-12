@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, showDate = false }) {
   return (
     <li className="post-card" data-testid={`post-card-${post.id}`}>
       {post.image && (
@@ -15,7 +15,7 @@ export default function PostCard({ post }) {
         </Link>
       )}
 
-      <p className="post-card__meta">{post.date}</p>
+      {showDate && <p className="post-card__meta">{post.date}</p>}
 
       <p className="post-card__category">
         <Link to={`/category/${post.category.slug}`}>{post.category.name}</Link>

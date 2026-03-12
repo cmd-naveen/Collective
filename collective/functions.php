@@ -406,6 +406,19 @@ function collective_customize_register( $wp_customize ) {
                 'section' => 'collective_settings',
                 'type'    => 'text',
         ) );
+
+        // Show/Hide Publish Date
+        $wp_customize->add_setting( 'collective_show_date', array(
+                'default'           => false,
+                'sanitize_callback' => 'wp_validate_boolean',
+        ) );
+
+        $wp_customize->add_control( 'collective_show_date', array(
+                'label'       => __( 'Show Publish Date', 'collective' ),
+                'description' => __( 'Display publish date on post cards and article pages.', 'collective' ),
+                'section'     => 'collective_settings',
+                'type'        => 'checkbox',
+        ) );
 }
 add_action( 'customize_register', 'collective_customize_register' );
 
