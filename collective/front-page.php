@@ -2,15 +2,12 @@
 /**
  * Template: Front Page (Homepage)
  * 
- * Hero post + 2-column grid layout
+ * Hero post + 2-column grid layout (matches React preview exactly)
  *
  * @package Collective
  */
 
 get_header();
-
-// Get the show date setting
-$show_date = get_theme_mod( 'collective_show_date', false );
 ?>
 
 <div class="site-content" role="main">
@@ -19,7 +16,7 @@ $show_date = get_theme_mod( 'collective_show_date', false );
 		<?php if ( have_posts() ) : ?>
 
 			<?php
-			// First post = Hero
+			// First post = Hero (latest article)
 			if ( have_posts() ) : the_post();
 			?>
 				<div class="hero-post">
@@ -48,7 +45,7 @@ $show_date = get_theme_mod( 'collective_show_date', false );
 				</div>
 			<?php endif; ?>
 
-			<!-- Remaining posts in grid -->
+			<!-- Remaining posts in 2-column grid (NO dates) -->
 			<ul class="posts-grid">
 				<?php while ( have_posts() ) : the_post(); ?>
 					<li class="post-card-grid">
@@ -68,16 +65,10 @@ $show_date = get_theme_mod( 'collective_show_date', false );
 							if ( $categories ) :
 							?>
 								<span class="post-card-grid__categories">
-									<?php foreach ( $categories as $i => $cat ) : ?>
-										<?php if ( $i > 0 ) : ?><span class="cat-sep">,</span><?php endif; ?>
-										<a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>">
-											<?php echo esc_html( $cat->name ); ?>
-										</a>
-									<?php endforeach; ?>
+									<a href="<?php echo esc_url( get_category_link( $categories[0]->term_id ) ); ?>">
+										<?php echo esc_html( $categories[0]->name ); ?>
+									</a>
 								</span>
-							<?php endif; ?>
-							<?php if ( $show_date ) : ?>
-								<span class="post-card-grid__date"><?php echo get_the_date( 'F j, Y' ); ?></span>
 							<?php endif; ?>
 						</div>
 
@@ -90,15 +81,10 @@ $show_date = get_theme_mod( 'collective_show_date', false );
 			</ul>
 
 			<div class="section-more-link">
-				<p><?php printf(
-					/* translators: %s: link to blog page */
-					esc_html__( 'For more recently published writing, visit our %s.', 'collective' ),
-					'<a href="' . esc_url( get_permalink( get_option( 'page_for_posts' ) ) ) . '">' . esc_html__( 'latest page', 'collective' ) . '</a>'
-				); ?></p>
+				<p>For more recently published writing and updates, visit our <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>">latest page</a>.</p>
 			</div>
 
 			<?php
-			// Pagination
 			the_posts_pagination( array(
 				'mid_size'  => 2,
 				'prev_text' => __( '&larr; Previous', 'collective' ),
