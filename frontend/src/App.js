@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage';
 import ArticlePage from './pages/ArticlePage';
 import CategoryPage from './pages/CategoryPage';
 import SearchPage from './pages/SearchPage';
+import AuthorPage from './pages/AuthorPage';
+import { AboutPage, PrivacyPage, TermsPage, AdvertisePage } from './pages/LegalPages';
 
 function NotFound() {
   return (
@@ -32,6 +34,11 @@ function App() {
           <Route path="/article/:slug" element={<ArticlePage />} />
           <Route path="/category/:slug" element={<CategoryPage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/author/:slug" element={<AuthorPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/advertise" element={<AdvertisePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

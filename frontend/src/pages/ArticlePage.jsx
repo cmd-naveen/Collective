@@ -2,12 +2,15 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { posts } from '../data/posts';
 import { ArticleContent } from '../components/ArticleComponents';
+import { ReactComponent as SeparatorSVG } from '../assets/page-separator.svg';
 
 function ArticleDivider() {
   return (
-    <div className="article-divider" aria-hidden="true">
+    <div className="article-divider" aria-hidden="true" data-testid="article-divider">
       <div className="article-divider__line" />
-      <span className="article-divider__logo">Collective</span>
+      <span className="article-divider__icon">
+        <SeparatorSVG />
+      </span>
     </div>
   );
 }

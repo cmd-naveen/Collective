@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import PostCard from '../components/PostCard';
 import { posts, categories } from '../data/posts';
 
 export default function CategoryPage() {
@@ -23,22 +22,53 @@ export default function CategoryPage() {
   return (
     <div className="site-content" data-testid="category-page">
       <div className="site-container">
-        <header className="archive-header">
-          <p className="archive-label">Category</p>
-          <h1 className="archive-title" data-testid="category-title">{category.name}</h1>
-        </header>
+
+        {/* Large category title — TC-style */}
+        <h1 className="category-page-title" data-testid="category-title">
+          {category.name}
+        </h1>
 
         {filtered.length > 0 ? (
-          <ul className="posts-list">
+          <div className="cat-articles-list" data-testid="category-articles-list">
             {filtered.map(post => (
-              <PostCard key={post.id} post={post} />
+              <div className="cat-article-row" key={post.id} data-testid={`cat-article-${post.id}`}>
+
+                {/* Left: image */}
+                <Link to={`/article/${post.slug}`} className="cat-article-row__image-wrap">
+                  <img
+                    className="cat-article-row__image"
+                    src={post.image}
+                    alt={post.title}
+                    loading="lazy"
+                  />
+                </Link>
+
+                {/* Right: title + author */}
+                <div className="cat-article-row__content">
+                  <h2 className="cat-article-row__title">
+                    <Link to={`/article/${post.slug}`}>{post.title}</Link>
+                  </h2>
+                  <div className="cat-article-row__author">
+                    <img
+                      src={post.author.avatar}
+                      alt={post.author.name}
+                      className="cat-author-avatar"
+                    />
+                    <Link to={`/author/${post.author.slug}`} className="cat-author-name">
+                      {post.author.name}
+                    </Link>
+                  </div>
+                </div>
+
+              </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p style={{ fontFamily: 'var(--font-sans)', color: 'var(--color-meta)', fontSize: 15 }}>
             No posts in this category yet.
           </p>
         )}
+
       </div>
     </div>
   );
