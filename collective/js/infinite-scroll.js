@@ -113,13 +113,17 @@
     var sentinel  = document.getElementById( 'infinite-scroll-sentinel' );
     if ( ! container || ! sentinel ) return;
 
-    // -- Divider --
+    // -- Divider with SVG separator --
     var divider = document.createElement( 'div' );
     divider.className   = 'article-divider';
     divider.innerHTML   =
       '<div class="article-divider__line"></div>' +
-      '<span class="article-divider__logo">' +
-        escapeHtml( cfg.siteName || 'Collective' ) +
+      '<span class="article-divider__icon">' +
+        '<svg width="60" height="12" viewBox="0 0 60 12" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<circle cx="6" cy="6" r="2" fill="#888888"/>' +
+          '<circle cx="30" cy="6" r="2" fill="#888888"/>' +
+          '<circle cx="54" cy="6" r="2" fill="#888888"/>' +
+        '</svg>' +
       '</span>';
 
     // -- Article wrapper (same classes as the original article) --
@@ -187,14 +191,6 @@
     var ta = document.createElement( 'textarea' );
     ta.innerHTML = str;
     return ta.value;
-  }
-
-  function escapeHtml( str ) {
-    return str
-      .replace( /&/g,  '&amp;' )
-      .replace( /</g,  '&lt;' )
-      .replace( />/g,  '&gt;' )
-      .replace( /"/g,  '&quot;' );
   }
 
   /* ------------------------------------------------------------------

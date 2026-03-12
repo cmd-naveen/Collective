@@ -1,6 +1,6 @@
 /**
  * Collective Theme — Main JavaScript
- * Handles: mobile nav overlay, search overlay, keyboard accessibility
+ * Handles: full-screen menu overlay, search overlay, keyboard accessibility, animations
  */
 (function () {
   'use strict';
@@ -8,24 +8,24 @@
   document.addEventListener( 'DOMContentLoaded', function () {
 
     /* ----------------------------------------------------------------
-       Mobile Navigation Overlay
+       Full-Screen Dark Menu Overlay
     ---------------------------------------------------------------- */
-    var menuBtn   = document.getElementById( 'menu-toggle' );
-    var mobileNav = document.getElementById( 'mobile-nav' );
-    var navClose  = document.getElementById( 'mobile-nav-close' );
+    var menuBtn       = document.getElementById( 'menu-toggle' );
+    var fullscreenMenu = document.getElementById( 'fullscreen-menu' );
+    var menuClose     = document.getElementById( 'menu-close' );
 
-    function openNav() {
-      if ( ! mobileNav ) return;
-      mobileNav.classList.add( 'is-open' );
+    function openMenu() {
+      if ( ! fullscreenMenu ) return;
+      fullscreenMenu.classList.add( 'is-open' );
       document.body.style.overflow = 'hidden';
       if ( menuBtn ) menuBtn.setAttribute( 'aria-expanded', 'true' );
       // Move focus to close button
-      if ( navClose ) setTimeout( function () { navClose.focus(); }, 50 );
+      if ( menuClose ) setTimeout( function () { menuClose.focus(); }, 50 );
     }
 
-    function closeNav() {
-      if ( ! mobileNav ) return;
-      mobileNav.classList.remove( 'is-open' );
+    function closeMenu() {
+      if ( ! fullscreenMenu ) return;
+      fullscreenMenu.classList.remove( 'is-open' );
       document.body.style.overflow = '';
       if ( menuBtn ) {
         menuBtn.setAttribute( 'aria-expanded', 'false' );
@@ -33,11 +33,17 @@
       }
     }
 
-    if ( menuBtn ) menuBtn.addEventListener( 'click', openNav );
-    if ( navClose ) navClose.addEventListener( 'click', closeNav );
-    if ( mobileNav ) {
-      mobileNav.addEventListener( 'click', function ( e ) {
-        if ( e.target === mobileNav ) closeNav();
+    if ( menuBtn ) menuBtn.addEventListener( 'click', openMenu );
+    if ( menuClose ) menuClose.addEventListener( 'click', closeMenu );
+
+    // Close when clicking on links in the menu
+    if ( fullscreenMenu ) {
+      var menuLinks = fullscreenMenu.querySelectorAll( 'a' );
+      menuLinks.forEach( function ( link ) {
+        link.addEventListener( 'click', function () {
+          // Small delay to allow navigation
+          setTimeout( closeMenu, 100 );
+        } );
       } );
     }
 
@@ -67,7 +73,7 @@
       }
     }
 
-    if ( searchBtn )  searchBtn.addEventListener( 'click', openSearch );
+    if ( searchBtn )   searchBtn.addEventListener( 'click', openSearch );
     if ( searchClose ) searchClose.addEventListener( 'click', closeSearch );
     if ( searchOverlay ) {
       searchOverlay.addEventListener( 'click', function ( e ) {
@@ -80,10 +86,16 @@
     ---------------------------------------------------------------- */
     document.addEventListener( 'keydown', function ( e ) {
       if ( e.key === 'Escape' ) {
-        closeNav();
+        closeMenu();
         closeSearch();
       }
     } );
+
+    /* ----------------------------------------------------------------
+       Smooth page entrance animations
+    ---------------------------------------------------------------- */
+    // Add 'loaded' class to body for entrance animations
+    document.body.classList.add( 'collective-loaded' );
 
   } );
 

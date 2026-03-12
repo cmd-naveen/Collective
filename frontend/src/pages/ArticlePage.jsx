@@ -122,7 +122,7 @@ export default function ArticlePage() {
         <React.Fragment key={post.id}>
           {index > 0 && <ArticleDivider />}
           <article
-            className="site-container site-content"
+            className="site-container site-container--narrow site-content"
             data-post-id={post.id}
             ref={el => { articleRefs.current[post.id] = el; }}
             data-testid={index === 0 ? 'article-main' : `article-infinite-${index}`}
