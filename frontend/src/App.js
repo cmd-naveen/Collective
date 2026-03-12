@@ -1,51 +1,40 @@
-import { useEffect } from "react";
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import ArticlePage from './pages/ArticlePage';
+import CategoryPage from './pages/CategoryPage';
+import SearchPage from './pages/SearchPage';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
+function NotFound() {
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
+    <div className="site-content">
+      <div className="site-container">
+        <div className="not-found-page">
+          <p className="error-code" aria-hidden="true">404</p>
+          <h2>Page Not Found</h2>
+          <p>The page you're looking for doesn't exist.</p>
+          <a href="/" className="btn-home">Go Back Home</a>
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ background: '#fff', minHeight: '100vh' }}>
       <BrowserRouter>
+        <Header />
         <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/article/:slug" element={<ArticlePage />} />
+          <Route path="/category/:slug" element={<CategoryPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
