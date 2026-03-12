@@ -1,7 +1,8 @@
 # PRD — Collective WordPress Theme
 
 **Date Created:** 2026-02-01  
-**Status:** MVP Complete (v1.0.0)
+**Last Updated:** 2025-12-XX  
+**Status:** React Preview Complete (v1.1.0)
 
 ---
 
@@ -15,11 +16,13 @@ Build a complete, downloadable WordPress theme that replicates the visual design
 
 | Choice | Selected |
 |---|---|
-| Delivery format | WordPress theme (downloadable ZIP) |
+| Delivery format | WordPress theme (downloadable ZIP) + React Live Preview |
 | Sans-serif font | Montserrat (Google Fonts, 400/600/700) |
 | Serif body font | Georgia (system font) |
 | Theme name | Collective |
 | Demo content | 8 original TC-style articles, 4 categories, 2 authors |
+| Logo | Text placeholder (ready for image logo) |
+| Related Articles | 6 items in 3-column grid |
 
 ---
 
@@ -95,6 +98,25 @@ collective/
 
 ## What's Been Implemented
 
+### 2025-12-XX — v1.1.0 React Preview Enhancement
+- **Leaderboard ad placeholder** (728x90) below header on all pages
+- **5:3 aspect ratio** for featured images (contained within content width)
+- **Related Articles section** with 6 items in 3-column grid layout
+- **Custom SVG separator** (three dots) between infinite scroll articles
+- **Enhanced header** with larger logo area supporting image logos
+- **Micro-animations throughout:**
+  - fadeInUp entrance animations on page content
+  - Staggered animations on post cards and menu items
+  - Image scale transitions on hover
+  - Underline animations on title links
+  - Button hover transformations
+  - Reduced-motion media query support
+- **Full-screen dark menu** (#0d0d0d) with veggie burger trigger
+- **Category page** with large title and two-column article rows
+- **Author page** with centered header, avatar, bio, and social links
+- **Legal pages** (About, Privacy, Terms, Advertise)
+- All features tested with 100% pass rate
+
 ### 2026-02-01 — v1.0.0 MVP
 - Complete WordPress theme with all 20 required files
 - Full CSS implementation (all spec variables, mobile-first responsive)
@@ -103,19 +125,21 @@ collective/
 - Demo content (8 articles, 4 categories, 2 authors) as WXR import file
 - README with installation, configuration, and child theme guide
 - Packaged as `collective.zip` at `/app/collective.zip`
+- React Live Preview at `/app/frontend/`
 
 ---
 
 ## Prioritized Backlog
 
 ### P0 — Critical (blocking use)
-- None known
+- [ ] **Update WordPress theme** to match React preview changes (leaderboard ad, 5:3 images, 6-item related articles, SVG separator, animations)
 
 ### P1 — High Value
 - [ ] Screenshot.png for WordPress theme browser (1200×900px preview)
 - [ ] Comments template (comments.php)
 - [ ] Page template (page.php)
 - [ ] Tag archive improvements (tag cloud)
+- [ ] Live search functionality in search overlay
 
 ### P2 — Nice to Have
 - [ ] Dark mode toggle (CSS variables make this trivial)
